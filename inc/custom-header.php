@@ -25,6 +25,8 @@
  * Use feature detection of wp_get_theme() which was introduced
  * in WordPress 3.4.
  *
+ * @todo Rework this function to remove WordPress 3.4 support when WordPress 3.6 is released.
+ *
  * @uses _s_header_style()
  * @uses _s_admin_header_style()
  * @uses _s_admin_header_image()
@@ -66,6 +68,7 @@ add_action( 'after_setup_theme', '_s_custom_header_setup' );
  * with previous versions, we will define our own version
  * of this function.
  *
+ * @todo Remove this function when WordPress 3.6 is released.
  * @return stdClass All properties represent attributes of the curent header image.
  *
  * @package _s
@@ -165,10 +168,10 @@ if ( ! function_exists( '_s_admin_header_image' ) ) :
 function _s_admin_header_image() { ?>
 	<div id="headimg">
 		<?php
-		if ( 'blank' == get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) || '' == get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) )
+		if ( 'blank' == get_header_textcolor() || '' == get_header_textcolor() )
 			$style = ' style="display:none;"';
 		else
-			$style = ' style="color:#' . get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) . ';"';
+			$style = ' style="color:#' . get_header_textcolor() . ';"';
 		?>
 		<h1><a id="name"<?php echo $style; ?> onclick="return false;" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
 		<div id="desc"<?php echo $style; ?>><?php bloginfo( 'description' ); ?></div>
